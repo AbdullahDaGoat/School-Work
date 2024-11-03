@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marxist and Postmodernism Analysis Presentation</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body {
+      scroll-behavior: smooth;
+    }
+    .slide {
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .animate-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    Parallax and Glassmorphism
+    .parallax {
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    .parallax-scroll {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-scroll .slide {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.5s ease;
+    }
+
+    .parallax-scroll .slide.active {
+      transform: translateY(0);
+    }
+
+    .parallax-scroll .slide.prev {
+      transform: translateY(-100%);
+    }
+
+    .parallax-scroll .slide.next {
+      transform: translateY(100%);
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    /* Custom Parallax Scroll Transitions */
+    .slide.parallax-glass {
+      position: relative;
+      overflow: hidden;
+    }
+    .parallax-glass:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      z-index: -1;
+      transition: opacity 0.5s ease-out;
+    }
+    /* Thought Bubble Animation */
+    .thought-bubble {
+      position: relative;
+      background: #e0e0ff;
+      border-radius: 50%;
+      padding: 20px;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    /* Zoom Effects */
+    .zoom-in {
+      animation: zoomIn 1s forwards;
+    }
+    .zoom-out {
+      animation: zoomOut 1s forwards;
+    }
+    @keyframes zoomIn {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(2);
+      }
+    }
+    @keyframes zoomOut {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(0.5);
+      }
+    }
+
+    .thought-container {
+      position: relative;
+      margin: 20px 0;
+    }
+    
+    .thought-bubble {
+      position: relative;
+      background: white;
+      border-radius: 30px;
+      padding: 20px;
+      margin: 20px;
+      border: 3px solid #9333ea;
+      box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .thought-bubble::before,
+    .thought-bubble::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border: 3px solid #9333ea;
+      border-radius: 50%;
+    }
+
+    .thought-bubble::before {
+      width: 20px;
+      height: 20px;
+      left: -30px;
+      bottom: 20px;
+    }
+
+    .thought-bubble::after {
+      width: 12px;
+      height: 12px;
+      left: -45px;
+      bottom: 10px;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .slide {
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .animate-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .list-remove-style > li{
+        list-style: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      background-color: transparent;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(148, 163, 184, 0.2);
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(100, 116, 139, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800" x-data="presentation()" x-init="init()">
+
+  <!-- Slide 1: Title -->
+  <section class="slide bg-gradient-to-r from-yellow-400 via-red-500 to-teal-500 flex items-center justify-center parallax-scroll">
+    <div class="text-center">
+      <h1 class="text-6xl font-bold text-white mb-4 animate-in" :class="{'visible': isVisible(0)}">
+        <i class="fas fa-book-reader"></i> Marxist and Postmodernism Analysis
+      </h1>
+      <p class="text-3xl text-white animate-in" :class="{'visible': isVisible(0)}" style="transition-delay: 0.2s;">
+        "A Girl and a Dog on a Friday Night" by Kelly Ward
+      </p>
+      <!-- Images of book cover and author -->
+      <div class="flex justify-center mt-8 animate-in" :class="{'visible': isVisible(0)}" style="transition-delay: 0.4s;">
+        <img src="https://www.taddlecreekmag.com/assets/img/TC38_GirlDog.jpg" alt="Book Cover" class="w-64 h-auto mx-4 transform hover:scale-110 transition duration-500 ease-in-out">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd4jlzlRajEyTWgCy2AVu6zrp0ONshevDYKg&s" alt="Author Kelly Ward" class="w-64 h-auto mx-4 transform hover:scale-110 transition duration-500 ease-in-out">
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Read-along Guide -->
+  <section class="slide bg-white parallax-glass parallax-scroll">
+    <h2 class="text-5xl font-semibold mb-8 animate-in text-center glass" :class="{'visible': isVisible(1)}">
+      <i class="fas fa-book-open text-green-600"></i> Read-along Guide
+    </h2>
+    <div class="flex justify-center">
+      <img src="https://i.ibb.co/Fzs08Qj/image.png" alt="Read-along Guide Image" class="animate-in w-4/5 h-auto shadow-lg transform hover:scale-105 transition duration-500 ease-in-out" :class="{'visible': isVisible(1)}" style="transition-delay: 0.2s;">
+    </div>
+  </section>
+
+  <!-- Slide 3: Overview of Marxist Literary Criticism -->
+  <section class="slide bg-white">
+    <h2 class="text-5xl font-semibold mb-8 animate-in" :class="{'visible': isVisible(2)}">
+      <i class="fas fa-hammer text-red-600"></i> Overview of Marxist Literary Criticism
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <ul class="list-disc ml-12 space-y-4 text-2xl animate-in" :class="{'visible': isVisible(2)}" style="transition-delay: 0.2s;">
+        <li><span class="font-bold">Historical Materialism:</span> Economic conditions shape society.</li>
+        <li><span class="font-bold">Class Struggle:</span> Conflict between bourgeoisie and proletariat.</li>
+        <li><span class="font-bold">Ideology & Hegemony:</span> Dominant ideas maintain ruling class power.</li>
+        <li>Literature reflects or challenges capitalist structures.</li>
+      </ul>
+      <div class="flex flex-col items-center animate-in" :class="{'visible': isVisible(2)}" style="transition-delay: 0.4s;">
+        <img src="https://assets.editorial.aetnd.com/uploads/2009/11/karl-marx-gettyimages-514679914.jpg" alt="Karl Marx" class="w-80 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+        <img src="https://preview.redd.it/class-struggle-v0-bux9lvlr7faa1.png?auto=webp&s=03c157f7d6f01bea4afa8a132421fe7b7c949218" alt="Class Struggle" class="w-80 h-auto shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Story Summary -->
+  <section class="slide bg-gray-50">
+    <h2 class="text-5xl font-semibold mb-8 animate-in" :class="{'visible': isVisible(3)}">
+      <i class="fas fa-book text-blue-600"></i> Story Summary
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="text-2xl space-y-4 animate-in" :class="{'visible': isVisible(3)}" style="transition-delay: 0.2s;">
+        <p>The story follows Rachel, a working-class mother, over an evening as she picks up her daughter Luca and deals with her partner Travis's absence due to work.</p>
+        <p>Their economic struggles are evident through their aging car, small apartment, and Travis's need for overtime.</p>
+        <p>Rachel grapples with the challenges of single motherhood while navigating a system that commodifies love and labor.</p>
+      </div>
+      <div class="flex flex-col items-center animate-in" :class="{'visible': isVisible(3)}" style="transition-delay: 0.4s;">
+        <img src="https://www.shutterstock.com/image-illustration/illustration-father-giving-missing-puzzle-600nw-1768568282.jpg" alt="Mother and Child" class="w-100 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Marxist Analysis - Socioeconomic Conditions -->
+  <section class="slide bg-white">
+    <h2 class="text-5xl font-semibold mb-8 animate-in" :class="{'visible': isVisible(4)}">
+      <i class="fas fa-chart-line text-green-600"></i> Marxist Analysis
+    </h2>
+    <h3 class="text-3xl font-semibold mb-6 animate-in" :class="{'visible': isVisible(4)}" style="transition-delay: 0.2s;">
+      Socioeconomic Conditions & Class Struggle
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <ul class="list-disc ml-12 space-y-4 text-2xl animate-in" :class="{'visible': isVisible(4)}" style="transition-delay: 0.4s;">
+        <li>Harsh realities of working-class life depicted through vivid sensory details.</li>
+        <li>Aging car with "muffled thumping" symbolizes economic precarity.</li>
+        <li>Small apartment with broken appliances underscores struggle.</li>
+        <li>Material conditions shape even the most intimate aspects of characters' lives.</li>
+      </ul>
+      <div class="flex flex-col items-center animate-in -mt-32" :class="{'visible': isVisible(4)}" style="transition-delay: 0.6s;">
+        <img src="https://media.istockphoto.com/id/639054186/photo/dirty-kitchen-is-in-the-temporary-apartment-for-living-refugees.jpg?s=612x612&w=0&k=20&c=hCj_zj3TCPyZbT7gRG9MnkExHe1FyByFSl7sZMgw0EU=" alt="Cramped Apartment" class="w-96 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+        <img src="https://images.pond5.com/bill-letters-spiral-piling-footage-040738590_iconl.jpeg" alt="Bills Piling Up" class="w-96 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Marxist Analysis - Ideology and Commodification of Love -->
+  <section class="slide bg-gray-50">
+    <h3 class="text-3xl font-semibold mb-6 animate-in" :class="{'visible': isVisible(5)}">
+      <i class="fas fa-heart-broken text-red-600"></i> Ideology & Commodification of Love
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <ul class="list-disc ml-12 space-y-4 text-2xl animate-in" :class="{'visible': isVisible(5)}" style="transition-delay: 0.2s;">
+        <li>Capitalist ideology infiltrates personal relationships.</li>
+        <li>Travis sells his labor, which takes him away from his family.</li>
+        <li>His physical affection becomes a rationed luxury due to work.</li>
+        <li>Gendered division of labor leaves Rachel shouldering domestic work.</li>
+      </ul>
+      <div class="flex flex-col items-center animate-in -mt-12" :class="{'visible': isVisible(5)}" style="transition-delay: 0.4s;">
+        <img src="https://i0.wp.com/iwanteditfirst.com/wp-content/uploads/2022/05/Long-Distance-Relationship-Ideas-to-Keep-the-Spark-Alive-98bbf6daf1be471384409acf671c3255-2.jpg?fit=1336%2C1002&ssl=1" alt="Distant Couple" class="w-96 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+        <img src="https://www.theminimalists.com/wp-content/uploads/2019/08/seth-reese-Tfd-XtAzQTA-unsplash-2.jpg" alt="Commodification of Love" class="w-96 h-auto shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Intersection with Feminist Analysis -->
+  <section class="slide bg-white">
+    <h2 class="text-5xl font-semibold mb-8 animate-in" :class="{'visible': isVisible(6)}">
+      <i class="fas fa-venus text-pink-600"></i> Intersection with Feminist Analysis
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="text-2xl space-y-4 animate-in" :class="{'visible': isVisible(6)}" style="transition-delay: 0.2s;">
+        <p>The story also explores how gender intersects with socioeconomic conditions, highlighting the double bind of patriarchy and capitalism.</p>
+        <p>Rachel's anxieties and constrained choices as a single mother reflect the emotional toll of intersecting oppressive systems.</p>
+        <p>Her fear for Luca's future is inextricable from their class position and the gendered expectations placed on Rachel as a mother.</p>
+      </div>
+      <div class="flex flex-col items-center animate-in -mt-20" :class="{'visible': isVisible(6)}" style="transition-delay: 0.4s;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRoWPO6HG5eqp0NCeqa5NW_njnEeBc8jUAFA&s" alt="Stressed Single Mother" class="w-96 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2n5F4QKg20KaxVVJ4RB67v1L__Y5a7xL3HQ&s" alt="Gender Inequality" class="w-96 h-auto shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Evaluating the Marxist Lens -->
+  <section class="slide bg-gray-50">
+    <h2 class="text-5xl font-semibold mb-8 animate-in" :class="{'visible': isVisible(7)}">
+      <i class="fas fa-search text-blue-600"></i> Evaluating the Marxist Lens
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="text-2xl space-y-4 animate-in" :class="{'visible': isVisible(7)}" style="transition-delay: 0.2s;">
+        <p>Marxist criticism powerfully illuminates class struggles in the story but may not capture all complexities.</p>
+        <p>An intersectional approach that considers how class interacts with gender, race, and other identity categories can provide a fuller understanding.</p>
+        <p>The story's vivid details of the characters' material conditions make it particularly well-suited to a Marxist analysis.</p>
+      </div>
+      <div class="flex flex-col items-center animate-in -mt-20" :class="{'visible': isVisible(7)}" style="transition-delay: 0.4s;">
+        <img src="https://icma.org/sites/default/files/Intersectionality-chart.jpg" alt="Intersectionality" class="w-80 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+        <img src="https://t4.ftcdn.net/jpg/04/39/70/39/360_F_439703985_BsVIwjygi2s5qOdlZPSsegrEjHgCsggt.jpg" alt="Diverse Hands" class="w-80 h-auto mb-6 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpoXVGUgFA-0LyctoNPp7jm6E5bB1f2CKhNw&s" alt="Critical Thinking" class="w-80 h-auto shadow-lg transform hover:scale-105 transition duration-500 ease-in-out">
+      </div>
+    </div>
+  </section>
+
+ <!-- Slide 9: Postmodernism Analysis -->
+ <section class="slide bg-white">
+    <div class="flex items-start">
+      <!-- Left side: Text content -->
+      <div class="mr-8">
+        <h2 class="text-5xl font-semibold mb-8 animate-in" :class="{'visible': isVisible(8)}">
+          <i class="fas fa-question-circle text-blue-600"></i> Postmodernism
+        </h2>
+        <ul class="list-disc ml-12 space-y-4 text-2xl animate-in" :class="{'visible': isVisible(8)}" style="transition-delay: 0.2s;">
+          <li>Criticism of how society views and treats different experiences/things.</li>
+          <li>Questions how people live their lives.</li>
+          <li>Believes that you have to take control of your life and live it how you want.</li>
+        </ul>
+      </div>
+  
+      <!-- Right side: Image -->
+      <div class="flex-shrink-0">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbV93S7Hl6hh4DyvIYCVB6iRKTcGzTsvaVCI7vLX8Gv5JunfGAMYUCKgGWO2Y3FAHOzeWLejrR6ILDFbbnHE0dB4NneA7CGUL-3gZGTuuWORZ1_81AiY4ptdSeuoS9kUYzn4iQ6PSD0tg/s320/postmodernism.gif" 
+        alt="Question Mark Icon" 
+        class="w-auto h-auto animate-in transform hover:scale-105 transition duration-500 ease-in-out" 
+        :class="{'visible': isVisible(8)}" 
+        style="transition-delay: 0.4s;">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Slide 10: Rachel Feels Trapped -->
+  <section class="slide bg-gray-50 py-4">
+    <div class="flex items-start">
+      <!-- Left side: Text content -->
+      <div class="mr-8">
+        <h2 class="text-5xl font-semibold mb-4 animate-in" :class="{'visible': isVisible(9)}">
+          <i class="fas fa-handcuffs text-gray-600 transform rotate-12 hover:rotate-0 transition-transform duration-300"></i> Rachel Feels Trapped in Her Life
+        </h2>
+        <ul class="list-disc ml-12 space-y-2 text-2xl animate-in" :class="{'visible': isVisible(9)}" style="transition-delay: 0.2s;">
+          <li>Travis often doesn't come home, leaving Rachel overwhelmed.</li>
+          <li>She has no time for important tasks other than caring for Luca.</li>
+          <li>Rachel wants to take back control but her attempts don't work.</li>
+        </ul>
+      </div>
+  
+      <!-- Right side: Image -->
+      <div class="flex-shrink-0">
+        <img src="https://wallpapers.com/images/hd/losing-time-artwork-hclzv625hsmgae8l.jpg" 
+        alt="Clock Icon" 
+        class="w-96 h-auto animate-in transform hover:scale-105 transition duration-500 ease-in-out" 
+        :class="{'visible': isVisible(9)}" 
+        style="transition-delay: 0.4s;">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Slide 11: Rachel Tries to Take Back Control -->
+  <section class="slide bg-white py-4">
+    <div class="flex items-start">
+      <!-- Left side: Text content -->
+      <div class="mr-8">
+        <h2 class="text-5xl font-semibold mb-4 animate-in" :class="{'visible': isVisible(10)}">
+          <i class="fas fa-arrow-rotate-left text-green-600 hover:scale-110 transition-transform duration-300"></i> Rachel Tries to Take Back Control
+        </h2>
+        <ul class="list-disc ml-12 space-y-2 text-2xl animate-in" :class="{'visible': isVisible(10)}" style="transition-delay: 0.2s;">
+          <li>Frequent flashbacks show how she ended up in her situation.</li>
+          <li>Screw metaphor shows Rachel was stuck from the beginning.</li>
+          <li>She never received guidance due to societal expectations.</li>
+          <li>Takes risks (car, crayon) out of frustration.</li>
+        </ul>
+      </div>
+  
+      <!-- Right side: Image -->
+      <div class="flex-shrink-0">
+        <img src="https://i.ibb.co/XjsLLBD/image.png" 
+        alt="Illustrative Image" 
+        class="w-96 h-auto animate-in transform hover:scale-105 transition duration-500 ease-in-out" 
+        :class="{'visible': isVisible(10)}" 
+        style="transition-delay: 0.4s;">
+      </div>
+    </div>
+  </section>
+  
+
+
+  <section class="slide bg-gray-50 parallax-scroll">
+    <h2 class="text-5xl font-semibold mb-8 animate-in" :class="{'visible': isVisible(11)}">
+      <i class="fas fa-brain text-purple-600"></i> Minds On Questions
+    </h2>
+    <ol class="list-decimal ml-12 space-y-8 text-2xl animate-in list-remove-style" :class="{'visible': isVisible(11)}" style="transition-delay: 0.2s;">
+      <li>
+        <div class="thought-container">
+          <div class="thought-bubble">
+            <span>How might this story be viewed through a feminist lens? Similarities or differences?</span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="thought-container">
+          <div class="thought-bubble">
+            <span>How might Rachel have more control if Travis worked near home?</span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="thought-container">
+          <div class="thought-bubble">
+            <span>How does the author use sensory details to convey working-class realities?</span>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+  
+  
+  <!-- Slide 13: Thank You -->
+  <section class="slide bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 flex items-center justify-center parallax-glass parallax-scroll">
+    <div class="text-center">
+      <h1 class="text-6xl font-bold text-white mb-6 animate-in" :class="{'visible': isVisible(slides.length - 1)}">
+        Thank You!
+      </h1>
+    </div>
+  </section>
+  <!-- JavaScript for animations -->
+  <script>
+    function presentation() {
+      return {
+        slideIndex: 0,
+        slides: [],
+        init() {
+          this.slides = document.querySelectorAll('.slide');
+          window.addEventListener('scroll', this.onScroll.bind(this));
+          this.onScroll(); // Initial check
+        },
+        onScroll() {
+          this.slides.forEach((slide, index) => {
+            const rect = slide.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            if (rect.top <= windowHeight / 1.2 && rect.bottom >= 0) {
+              this.slideIndex = index;
+              slide.querySelectorAll('.animate-in').forEach((el) => {
+                el.classList.add('visible');
+              });
+              if (slide.classList.contains('parallax-glass')) {
+                slide.style.transform = `translateY(${rect.top / 10}px)`;
+              }
+            } else {
+              slide.querySelectorAll('.animate-in').forEach((el) => {
+                el.classList.remove('visible');
+              });
+              if (slide.classList.contains('parallax-glass')) {
+                slide.style.transform = `translateY(0)`;
+              }
+            }
+          });
+        },
+        isVisible(index) {
+          return index === this.slideIndex;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
